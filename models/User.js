@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../connection/sqlConnection');
 
-class modelUser extends Model
+class User extends Model
 {
     checkPass(loginPassword)
     {
@@ -10,7 +10,7 @@ class modelUser extends Model
     }
 }
 
-modelUser.init(
+User.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -56,8 +56,8 @@ modelUser.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'modelUser',
+        modelName: 'User',
     }
 );
 
-module.exports = modelUser;
+module.exports = User;

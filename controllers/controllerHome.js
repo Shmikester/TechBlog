@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const sequelize = require('../connection/sqlConnection');
-const { modelPost, modelComment } = require('../models');
+const { Post, Comment } = require('../models');
 
 // get posts for homepage
 router.get('/', (req, res) =>
 {
-    modelPost.findAll().then(postData =>
+    Post.findAll().then(postData =>
     {
         const posts = postData.map(postsData => postsData.get({ plain: true }));
         res.render('homepage', {
@@ -44,13 +44,13 @@ router.get('/signup', (req, res) =>
 //get post by id
 router.get('/post/:id', (req, res) =>
 {
-    modelPost.findAll({
+    Post.findAll({
         where: {
             id: req.params.id
         },
         include: [
             {
-                model: modelComment,
+                model: Comment,
                 where: {
                     id: req.params.id
                 }

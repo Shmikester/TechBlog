@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { modelUser } = require('../../models');
+const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // gets all users
 router.get('/', (req, res) =>
 {
-    modelUser.findAll({
+    User.findAll({
         attributes: { exclude: ['password'] }
     }).then(usersData => res.json(usersData)).catch(err =>
     {
@@ -17,7 +17,7 @@ router.get('/', (req, res) =>
 // get user by id
 router.get('/:id', (req, res) =>
 {
-    modelUser.findOne({
+    User.findOne({
         attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) =>
 // signup user
 router.post('/signup', (req, res) =>
 {
-    modelUser.create({
+    User.create({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
@@ -64,7 +64,7 @@ router.post('/signup', (req, res) =>
 //login user
 router.post('/login', (req, res) =>
 {
-    modelUser.findOne({
+    User.findOne({
         where: {
             email: req.body.email
         }
@@ -118,7 +118,7 @@ router.post('/logout', (req, res) =>
 //update user by id
 router.put('/:id', (req, res) =>
 {
-    modelUser.update(req.body, {
+    User.update(req.body, {
         individualHooks: true,
         where: {
             id: req.params.id
@@ -142,7 +142,7 @@ router.put('/:id', (req, res) =>
 // delete user by id
 router.delete('/:id', (req, res) =>
 {
-    modelUser.destroy({
+    User.destroy({
         where: {
             id: req.params.id
         }

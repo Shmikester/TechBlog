@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { modelComment } = require('../../models');
+const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get all comments
 router.get('/', (req, res) =>
 {
-    modelComment.findAll().then(commentsData => res.json(commentsData)).catch(err =>
+    Comment.findAll().then(commentsData => res.json(commentsData)).catch(err =>
     {
         console.log(err);
         res.status(500).json(err);
@@ -15,7 +15,7 @@ router.get('/', (req, res) =>
 // get comment by Id
 router.get('/:id', (req, res) =>
 {
-    modelComment.findOne({
+    Comment.findOne({
         where: {
             id: req.params.id
         },
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) =>
 // create comment
 router.post('/', (req, res) =>
 {
-    modelComment.create({
+    Comment.create({
         commentText: req.params.body
     }).then(commentData => res.json(commentData)).catch(err =>
     {
@@ -50,7 +50,7 @@ router.post('/', (req, res) =>
 // update comment by id
 router.put('/:id', (req, res) =>
 {
-    modelComment.update(req.body, {
+    Comment.update(req.body, {
         where: {
             id: req.params.id
         }
@@ -73,7 +73,7 @@ router.put('/:id', (req, res) =>
 // delete comment by id
 router.delete('/:id', (req, res) =>
 {
-    modelComment.destroy({
+    Comment.destroy({
         where: {
             id: req.params.id
         }

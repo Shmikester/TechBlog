@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { modelPost } = require('../../models');
+const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get all posts
 router.get('/', (req, res) =>
 {
-    modelPost.findAll().then(postsData => res.json(postsData)).catch(err =>
+    Post.findAll().then(postsData => res.json(postsData)).catch(err =>
     {
         console.log(err);
         res.status(500).json(err);
@@ -15,7 +15,7 @@ router.get('/', (req, res) =>
 // get post by Id
 router.get('/:id', (req, res) =>
 {
-    modelPost.findOne({
+    Post.findOne({
         where: {
             id: req.params.id
         },
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) =>
 // create post
 router.post('/', (req, res) =>
 {
-    modelPost.create({
+    Post.create({
         title: req.body.title,
         body: req.body.body,
         date: req.body.date,
@@ -53,7 +53,7 @@ router.post('/', (req, res) =>
 // update post by id
 router.put('/:id', (req, res) =>
 {
-    modelPost.update(req.body, {
+    Post.update(req.body, {
         where: {
             id: req.params.id
         }
@@ -76,7 +76,7 @@ router.put('/:id', (req, res) =>
 // delete post by id
 router.delete('/:id', (req, res) =>
 {
-    modelPost.destroy({
+    Post.destroy({
         where: {
             id: req.params.id
         }
