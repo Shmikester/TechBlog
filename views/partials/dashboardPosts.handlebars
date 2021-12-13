@@ -1,0 +1,20 @@
+<div class="column is-one-third-fullhd is-one-third-widescreen is-half-tablet">
+    <div class="box">
+        <div class="container mb-3">
+            <button class="delete is-pulled-right" onclick="buttonDelete({{id}})"></button>
+            <h1 class="title">{{title}}</h1>
+        </div>
+
+        <div class="container my-3">
+            <h2 class="subtitle">{{date}}</h2>
+            <p>{{body}}</p>
+        </div>
+
+        <div class="container mt-3">
+            <a href="/dashboard/editPost/" class="button">Edit Post</a>
+        </div>
+    </div>
+</div>
+
+<script src="/javascript/editPost.js"></script>
+<script src="/javascript/deletePost.js"></script>
